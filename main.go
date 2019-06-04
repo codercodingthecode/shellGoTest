@@ -52,7 +52,7 @@ func main() {
 	defer keyboard.Close()
 
 	// starting application with user messages
-	StarupMessages(&application.messages)
+	StartupMessages(&application.messages)
 
 	// starts app go routines
 	application.wg.Add(3)

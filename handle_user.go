@@ -15,7 +15,7 @@ func HandleUserInput(app *AppMain) {
 
 		if err != nil {
 			panic(err)
-		} else if key == keyboard.KeySpace {
+		} else if key == keyboard.KeySpace && app.settings.tracker {
 			var str string
 			app.breaker <- true
 			fmt.Println(app.messages.optionMsg)
@@ -24,6 +24,7 @@ func HandleUserInput(app *AppMain) {
 			if str == "" {
 				fmt.Println(app.messages.defaultMsg)
 				app.options[0] = "tick"
+				// app.settings.tracker = true
 				go TickTock(app.breaker, app.wg, app.tk)
 			} else {
 				fmt.Println("NOW PRINTING ", str, " INSTEAD OF ", app.options[0])

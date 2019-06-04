@@ -15,7 +15,7 @@ Loop:
 			break Loop
 
 		default:
-			if time.Now().Second() == 0 && time.Now().Minute() == 05 {
+			if time.Now().Second() == 0 && time.Now().Minute() == 0 {
 				tk <- 2 // bong
 			} else if time.Now().Second() == 0 {
 				tk <- 1 // tock

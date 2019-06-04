@@ -29,7 +29,7 @@ func TimeRun(runTime time.Duration) {
 }
 
 // StartupMessages provides guidance to users
-func StarupMessages(msgs *AppMessages) {
+func StartupMessages(msgs *AppMessages) {
 	fmt.Println(msgs.startMsg)
 	fmt.Println(msgs.escapeMsg)
 	fmt.Println(msgs.spaceMsg)
