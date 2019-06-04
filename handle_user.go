@@ -20,15 +20,21 @@ func HandleUserInput(app *AppMain) {
 			app.breaker <- true
 			fmt.Println(app.messages.optionMsg)
 			fmt.Scanln(&str)
-			fmt.Println("NOW PRINTING ", str, " INSTEAD OF ", app.options[0])
-			app.options[0] = str
-			time.Sleep(time.Second * 3)
 			app.wg.Add(1)
-			go TickTock(app.breaker, app.wg, app.tk)
+			if str == "" {
+				fmt.Println(app.messages.defaultMsg)
+				app.options[0] = "tick"
+				go TickTock(app.breaker, app.wg, app.tk)
+			} else {
+				fmt.Println("NOW PRINTING ", str, " INSTEAD OF ", app.options[0])
+				app.options[0] = str
+				time.Sleep(time.Second * 3)
+				go TickTock(app.breaker, app.wg, app.tk)
+			}
 
 		} else if key == keyboard.KeyEnter {
 			if !app.settings.tracker {
-				fmt.Println("STARTING CLOCK")
+				fmt.Println(app.messages.startClockMsg)
 				app.wg.Add(1)
 				app.settings.tracker = true
 				go TickTock(app.breaker, app.wg, app.tk)
@@ -37,7 +43,7 @@ func HandleUserInput(app *AppMain) {
 			}
 
 		} else if key == keyboard.KeyEsc {
-			fmt.Println("EXITING APPLICATION")
+			fmt.Println(app.messages.exitMsg)
 			if app.settings.tracker {
 				app.breaker <- true
 			}

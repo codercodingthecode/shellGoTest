@@ -13,7 +13,7 @@ type AppSettings struct {
 
 // AppMessages provide messages to services
 type AppMessages struct {
-	startMsg, spaceMsg, escapeMsg, optionMsg, warningMsg string
+	startMsg, spaceMsg, escapeMsg, optionMsg, warningMsg, defaultMsg, exitMsg, startClockMsg string
 }
 
 // AppMain provide services to main application
