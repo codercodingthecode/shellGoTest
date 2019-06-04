@@ -10,14 +10,6 @@ import (
 	"github.com/inancgumus/screen"
 )
 
-// const (
-// startMsg   =
-// spaceMsg   =
-// escapeMsg  =
-// optionMsg  =
-// warningMsg =
-// )
-
 type appSettings struct {
 	runningTime time.Duration
 	tracker     bool
@@ -77,6 +69,11 @@ func main() {
 	screen.MoveTopLeft()
 
 	// setup
+	app := appSettings{
+		runningTime: 3,
+		tracker:     false,
+	}
+
 	msgs := messages{
 		startMsg:   "PRESS ENTER TO START THE CLOCK",
 		spaceMsg:   "PRESS SPACE BAR AT ANY TIME TO SELECT AN OPTION DURING RUN TIME",
@@ -85,16 +82,10 @@ func main() {
 		warningMsg: "APPLICATION ALREADY RUNNING, PLEASE CHOOSE ANOTHER OPTION BY PRESSING SPACE OR ESC TO EXIT",
 	}
 
-	app := appSettings{
-		runningTime: 3,
-		tracker:     false,
-	}
-
 	var wg sync.WaitGroup
 	tk := make(chan int)
 	breaker := make(chan bool)
 	options := [3]string{"tick", "tock", "bong"}
-	// tracker := false
 
 	// setup keyboard key watcher
 	err := keyboard.Open()
@@ -145,7 +136,6 @@ func main() {
 				time.Sleep(time.Second * 1)
 				os.Exit(0)
 			}
-
 		}
 	}()
 	wg.Add(1)
